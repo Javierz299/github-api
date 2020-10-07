@@ -12,10 +12,12 @@ const useFetchJobs = (params,page) => {
 
     useEffect(() => {
         //whenever params change cancel prev request
-        const cancelToken = axios.CancelToken.source();
+        const cancelToken1 = axios.CancelToken.source();
+        const cancelToken2 = axios.CancelToken.source();
+
         dispatch(ACTIONS.make_request())
         axios.get(`${BASE_URL}`,{
-            cancelToken: cancelToken.token,
+            cancelToken1: cancelToken1.token,
             params: {markdown: true, page: page, ...params}
         })
         .then(res => dispatch(ACTIONS.get_data(res.data)))
@@ -26,9 +28,23 @@ const useFetchJobs = (params,page) => {
             dispatch(ACTIONS.error({error: err}))
         });
 
+        /////////checking if for next page of jobs
+        axios.get(`${BASE_URL}`,{
+            cancelToken2: cancelToken2.token,
+            params: {markdown: true, page: page + 1, ...params}
+        })
+        .then(res => dispatch(ACTIONS.has_next_page(res.data.length !== 0)))
+        .catch((err) => {
+            //when request is canceled err will be thrown
+            //only catch unintential errors
+            if(axios.isCancel(err)) return;
+            dispatch(ACTIONS.error({error: err}))
+        });
+
         //clean-up prev request
         return () => {
-            cancelToken.cancel()
+            cancelToken1.cancel()
+            cancelToken2.cancel()
         }
 
     }, [params,page])

@@ -21,6 +21,11 @@ const JobsReducer = (state, action) => {
             error: action.payload.error,
             jobs: []
         }
+        case ACTION_TYPES.HAS_NEXT_PAGE:
+            return {
+                ...state,
+                has_next_page: action.payload,
+            }
         default:
             return state
     }
