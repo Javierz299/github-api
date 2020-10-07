@@ -1,24 +1,25 @@
 import * as ACTION_TYPES from './ActionTypes'
 
-const initialState = {
-    jobs: [],
-    loading: false,
-    error: false,
-}
-
-const JobsReducer = (state = initialState, action) => {
+const JobsReducer = (state, action) => {
     switch(action.type){
-        case ACTION_TYPES.TEST:
+        case ACTION_TYPES.MAKE_REQUEST:
         return {
-            ...state
+            ...state,
+            loading: true,
+            jobs: [],
         }
-        case ACTION_TYPES.TEST1:
+        case ACTION_TYPES.GET_DATA:
         return {
-            ...state
+            ...state,
+            loading: false, 
+            jobs: action.payload,
         }
-        case ACTION_TYPES.TEST2:
+        case ACTION_TYPES.ERROR:
         return {
-            ...state
+            ...state,
+            loading: false,
+            error: action.payload.error,
+            jobs: []
         }
         default:
             return state

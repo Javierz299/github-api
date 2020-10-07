@@ -1,20 +1,19 @@
 import * as ACTION_TYPES from './ActionTypes'
 
-export const test = (jobs) => {
+export const make_request = () => {
     return {
-        type: ACTION_TYPES.TEST,
-        payload: jobs,
+        type: ACTION_TYPES.MAKE_REQUEST,
     }
 }
-export const test1 = (jobs) => {
+export const get_data = (data) => {
     return {
-        type: ACTION_TYPES.TEST,
-        payload: jobs,
+        type: ACTION_TYPES.GET_DATA,
+        payload: data,
     }
 }
-export const test2 = (jobs) => {
+export const error = (err) => {
     return {
-        type: ACTION_TYPES.TEST,
-        payload: jobs,
+        type: ACTION_TYPES.ERROR,
+        payload: err,
     }
 }

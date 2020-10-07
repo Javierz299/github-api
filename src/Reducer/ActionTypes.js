@@ -1,5 +1,5 @@
-export const TEST = "TEST"
+export const MAKE_REQUEST = "MAKE_REQUEST";
 
-export const TEST1 = "TEST1"
+export const GET_DATA = "GET_DATA";
 
-export const TEST2 = "TEST2"
+export const ERROR = "ERROR";
