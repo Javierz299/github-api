@@ -9,7 +9,6 @@ const BASE_URL = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/po
 
 const useFetchJobs = (params,page) => {
     const [state, dispatch] = useReducer(JobsReducer, {jobs: [], loading: false, error: false, })
-    console.log('state',state)
     useEffect(() => {
         //whenever params change cancel prev request
         const cancelToken1 = axios.CancelToken.source();

@@ -5,18 +5,30 @@ import useFetchJobs from './Hooks/useFetchJobs'
 
 import Job from './Functional/Job'
 import JobsPagination from './Functional/JobsPagination';
+import SearchForm from './Functional/SearchForm';
 
 const App = () => {
   const [params, setParams] = useState({});
   const [page,setPage] = useState(1)
 
   const { jobs, loading, error, has_next_page } = useFetchJobs(params,page)
+
+  const handleParamchange = (e) => {
+    const param = e.target.name;
+    const value = e.target.value;
+    setPage(1)
+    setParams(prevParams => { return {...prevParams, [param]: value}})
+
+  }
+
   return (
     <div className="App">
-      {console.log('useFetchJob',has_next_page)}
       <header className="App-header">
         <h1>GitHub</h1>
       </header>
+      <div>
+        <SearchForm params={params} onParamChange={handleParamchange} />
+      </div>
       <section>
         <JobsPagination page={page} setPage={setPage} hasNextPage={has_next_page} />
       </section>

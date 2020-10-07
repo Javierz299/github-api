@@ -19,7 +19,6 @@ export const error = (err) => {
 }
 
 export const has_next_page = (bool) => {
-    console.log("actions boolean",bool)
     return {
         type: ACTION_TYPES.HAS_NEXT_PAGE,
         payload: bool,

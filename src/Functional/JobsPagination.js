@@ -5,8 +5,6 @@ const JobsPagination = ({page, setPage, hasNextPage}) => {
         setPage(prevPage => prevPage + amount)
     }
 
-
-
     return (
         <div>
             {page !== 1 && <span onClick={() => adjustPage(-1)} >{"Prev"}</span>}
